@@ -1,0 +1,39 @@
+#!/usr/bin/python2.7
+import sys
+import os
+
+used = set();
+
+def go(oldFile, path):
+    relative = os.path.join(os.path.dirname(oldFile), path)
+    if os.path.exists(relative):
+        return relative
+    else:
+        return path
+
+def dfs(file):
+    if file in used:
+        return
+    used.add(file)
+    if os.path.isdir(file):
+        for inner in os.listdir(file):
+            dfs(file + '/' + inner)
+    else:
+        with open(file, "r") as f:
+            for line in f:
+                if line.startswith("#pragma once"):
+                    continue
+
+                if line.startswith("#include <"):
+                    name = line[8:].strip("\n\r \"")
+                    if name in used:
+                        continue
+                    used.add(name)
+                    print line,
+                elif line.startswith("#include \""):
+                    dfs(go(file, line[8:].strip("\n\r \"")))
+                else:
+                    print line,
+
+for file in sys.argv[1:]:
+    dfs(file)
