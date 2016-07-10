@@ -24,4 +24,18 @@ int fastPow(int base, int degree, int mod)
     return result;
 }
 
+long long fastPow(int base, int degree)
+{
+    long long result = 1;
+    while (degree) {
+        if (degree & 1) {
+            result *= base;
+        }
+        base *= base;
+        degree >>= 1;
+    }
+    return result;
+}
+
+
 } // namespace fugo
