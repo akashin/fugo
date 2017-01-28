@@ -37,6 +37,26 @@ std::vector<std::pair<int, int>> factorize(int x)
 }
 
 template <typename T>
+bool isPrime(T x) {
+    if (x == 1 || x == 2 || x == 3) {
+        return true;
+    }
+    if (x % 2 == 0 || x % 3 == 0) {
+        return false;
+    }
+
+    for (T i = 1; (i * 6 - 1) * (i * 6 - 1) <= x; ++i) {
+        if (x % (6 * i - 1) == 0) {
+            return false;
+        }
+        if (x % (6 * i + 1) == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+template <typename T>
 T gcd(T a, T b)
 {
     if (!a) {
