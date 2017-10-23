@@ -1,7 +1,6 @@
 #include <vector>
 
-namespace fugo
-{
+namespace fugo {
 
 std::vector<int> findDivisors(int x)
 {

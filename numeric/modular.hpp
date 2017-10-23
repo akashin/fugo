@@ -1,5 +1,4 @@
-namespace fugo
-{
+namespace fugo {
 
 template <typename T>
 T mulMod(T a, T b, T mod)
